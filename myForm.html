@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/formPageGoogleMap.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="mycontacts.html">My Contacts</a>
+            <a href="mywidgets.html">My Widgets</a>
+            <a href="myForm.html">My Form</a>
+        </nav>
+    </header>
+    <div class="mainForm" id="formSideBySide">
+        <div class="container">
+            <form action="http://www-users.cselabs.umn.edu/~joh13266/echo.php" method="post">
+                <div class="row">
+                    <div class="label">
+                        <label for="nameEntry">Name</label>
+                    </div>
+                    <div class="entryData">
+                        <input type="text" id="nameEntry" name="name" placeholder="Your name" pattern="^[a-zA-Z0-9]+" title="Name must be alphanumeric" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="categoryEntry">Category</label>
+                    </div>
+                    <div class="entryData">
+                        <select id="categoryEntry" name="category" required>
+                            <option value="">Choose</option>
+                            <option value="personal">Personal</option>
+                            <option value="academic">Academic</option>
+                            <option value="industry">Industry</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="locationEntry">Location</label>
+                    </div>
+                    <div class="entryData">
+                        <input type="text" id="locationEntry" name="location" placeholder="Location" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="contactEntry">Contact Information</label>
+                    </div>
+                    <div class="entryData">
+                        <input type="text" id="contactEntry" name="contact" placeholder="Contact" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="emailEntry">Email</label>
+                    </div>
+                    <div class="entryData">
+                        <input type="text" id="emailEntry" name="email" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="websiteEntry">Website</label>
+                    </div>
+                    <div class="entryData">
+                        <input type="url" id="websiteEntry" name="website" placeholder="Website" required>
+                    </div>
+                </div>
+                <input type = "submit" value = "Submit" >
+            </form>
+        </div>
+
+        <div id="formGoogleMap"></div>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=places&v=weekly" type="text/javascript"></script>
+
+    </div>
+</body>
+</html>

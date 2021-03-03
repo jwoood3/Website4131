@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<title>Contacts Page</title>
+		<link rel="stylesheet" href="css/style.css">
+		<meta charset="utf-8">
+		<script src="js/script.js"></script>
+		<script src="js/googleMap.js"></script>
+    </head>
+    <body>
+		<header>
+			<nav>
+				<a href="mycontacts.html">My Contacts</a>
+				<a href="mywidgets.html">My Widgets</a>
+				<a href="myForm.html">My Form</a>
+			</nav>
+		</header>
+		<div class="main">
+			<h1>My Contact List</h1>
+			<div id="sideBySide">
+				<div class="side">
+					<table class="ContactTable">
+						<tr>
+							<th>Name</th>
+							<th>Category</th>
+							<th>Location</th>
+							<th>Contact Information</th>
+							<th>email</th>
+							<th>Website</th>
+						</tr>
+						<tr onmouseover="AppearImage('img1')" onmouseout="DissapearImage('img1')">
+							<td class="Name">Joan Gabel</td>
+							<td>Academic</td>
+							<td class="Location">202 Morrill Hall <br/> 100 Church St SE <br/> Minneapolis, MN 55455</td>
+							<td class="ContactInfo">President of the University of Minnesota <img src="img/morrill_140522_2592.jpg" alt="Morrill" id="img1" class="thumbnail"></td>
+							<td>upres@umn.edu</td>
+							<td> <a href="https://president.umn.edu/about">UMN President</a> </td>
+						</tr>
+						<tr onmouseover="AppearImage('img2')" onmouseout="DissapearImage('img2')">
+							<td class="Name">Mostafa Kaveh</td>
+							<td>Academic</td>
+							<td class="Location">105 Walter Library <br/> 117 Pleasant St SE <br/> Minneapolis, MN 55455</td>
+							<td class="ContactInfo">Dean of the College of Science and Engineering <img src="img/walter2.jpg" alt="Walter" id="img2" class="thumbnail"></td>
+							<td>mos@umn.edu</td>
+							<td> <a href="https://cse.umn.edu/college/office-dean">UMN CSE Dean</a> </td>
+						</tr>
+						<tr onmouseover="AppearImage('img3')" onmouseout="DissapearImage('img3')">
+							<td class="Name">Kimberly Scott</td>
+							<td>Academic</td>
+							<td class="Location">Keller Hall 3-166 <br/> 200 Union St SE <br/> Minneapolis, MN 55455</td>
+							<td class="ContactInfo">ECE Department Undergraduate Academic Advisor <img src="img/keller.jpg" alt="Keller" id="img3" class="thumbnail"></td>
+							<td>scot0052@umn.edu</td>
+							<td> <a href="https://sites.google.com/umn.edu/ecematrix/home">UMN ECE Matrix</a> </td>
+						</tr>
+						<tr onmouseover="AppearImage('img4')" onmouseout="DissapearImage('img4')">
+							<td class="Name">Paul Strykowski</td>
+							<td>Academic</td>
+							<td class="Location">Lind Hall 115 <br> 207 Church Street SE <br/> Minneapolis, MN 55455</td>
+							<td class="ContactInfo">Associate Dean for Undergraduate Programs <img src="img/lindHall.jpg" alt="Lind" id="img4" class="thumbnail"></td>
+							<td>pstry@umn.edu</td>
+							<td> <a href="https://cse.umn.edu/me/paul-strykowski">ME Faculty Page</a> </td>
+						</tr>
+						<tr onmouseover="AppearImage('img5')" onmouseout="DissapearImage('img5')">
+							<td class="Name">Daniel Challou</td>
+							<td>Academic</td>
+							<td class="Location">Shepherd Labs 383 <br/> 100 Union St SE <br/> Minneapolis, MN 55455</td>
+							<td class="ContactInfo">Lecturer, Department of Computer Science & Engineering <img src="img/Shepherd.jpg" alt="Shepherd" id="img5" class="thumbnail"></td>
+							<td>chal0006@umn.edu</td>
+							<td> <a href="https://cse.umn.edu/cs/dan-challou">CS Faculty Page</a> </td>
+						</tr>
+					</table>
+				</div>
+				<div class="side" id="imageDiv">
+					<img src="img/campusChair.jpg" alt="UMN-Photos" id="sideImage" class="rotate" onclick="getTableInfo()">
+					<div id="buttonDiv">
+						<button type="button" onclick="rotateImage()" id="rotateButton">Rotate</button>
+						<button type="button" onclick="pickImage()" id="randomButton">Random</button>
+					</div>
+					
+				</div>
+			</div>
+			<br/>
+
+			<div id="sideBySideMap">
+				<div id="directionsPanel"></div>
+				<div id="googleMap"></div>
+				
+				<!--added &libraries=places to end of api link-->
+				<!-- This will not work without a valid Google Maps API key -->
+				<!-- The API key should be inserted in the url below in place of "YOUR_API_KEY" -->
+				<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=places&v=weekly" type="text/javascript"></script>
+				<div id="mapInputArea">
+					<div id="placeSearch">
+						<div class="rowTwo">
+							<label for="findTypeID">Find</label>
+							<select name="findType" id="findTypeID" onchange="enableOrDisableInput()">
+								<option value="restaurant">Restaurant</option>
+								<option value="hospital">Hospital</option>
+								<option value="parking">Parking</option>
+								<option value="supermarket">Supermarket</option>
+								<option value="other" onclick="alert(this.value);">Other</option>
+							</select>
+						</div>
+						<div class="rowTwo">
+							<input type="text" name="keyword" placeholder="Enter other places" id="keywordBox" disabled>
+						</div>
+						<div class="rowTwo">
+							In <input type="text" name="radius" id="radiusID" placeholder="Enter radius"> meters
+						</div>
+						<div class="rowTwo">
+							<button type="button" id="searchButton" onclick="search()">Search</button>
+						</div>
+					</div>
+					<div id="directions">
+						<div class="rowThree">
+							Direction to
+						</div> 
+						<div class="rowThree">
+							<input type="text" name="place" placeholder="Enter a Location" id="destinationAddress">
+						</div> 
+						<div class="rowTwo">
+							by
+						</div> 
+						<div class="rowThree">
+							<input type="radio" id="walk" name="transportation" value="WALKING">
+							<label for="walk">Walk</label> <br/>
+							<input type="radio" id="drive" name="transportation" value="DRIVING">
+							<label for="drive">Drive</label> <br/>
+							<input type="radio" id="transit" name="transportation" value="TRANSIT">
+							<label for="transit">Transit</label> <br/>
+						</div>
+						<div class="rowThree">
+							<button type="button" onclick="directions()">Go</button>
+							<button type="button" onclick="removeDirections()">Clear Directions</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p>This page and the widgets page have been tested in Chrome, Safari, and Firefox</p>
+		</div>
+	</body>
+</html>
